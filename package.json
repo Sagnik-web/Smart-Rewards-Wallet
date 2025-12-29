@@ -1,0 +1,19 @@
+{
+  "name": "smart_rewards_wallet",
+  "version": "1.0.0",
+  "description": "Smart Rewards & Wallet",
+  "license": "ISC",
+  "author": "Sagnik Biswas",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.2"
+  }
+}
