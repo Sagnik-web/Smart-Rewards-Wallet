@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "955911a0-9d1d-4afa-9dbb-816941d43fd1",
+		"name": "Smart Rewards Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10264725"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Signup - User A",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"Sagnik\", \"email\": \"sagnik@gmail.com\", \"phone\": \"7003103394\", \"password\": \"password123\" }"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup - User B",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"Rahul\", \"email\": \"rahul007@gmail.com\", \"phone\": \"9434103394\", \"password\": \"password123\" }"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login - User A",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = pm.response.json();",
+									"pm.environment.set(\"tokenA\", json.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"sagnik@gmail.com\",\"password\": \"password123\" }"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login - User B",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = pm.response.json();",
+									"pm.environment.set(\"tokenB\", json.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"email\": \"rahul007@gmail.com\", \n    \"password\": \"password123\" \n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "REWARDS",
+			"item": [
+				{
+					"name": "Seed Vouchers (Run Once)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rewards/seed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rewards",
+								"seed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WALLET - USER A",
+			"item": [
+				{
+					"name": "Add Money - ₹500",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTJiZGEyNDBiYjQ2YzRmOWYzNjViZiIsImlhdCI6MTc2NzAzMDc5OCwiZXhwIjoxNzY3NjM1NTk4fQ.8FykNK6T-CM34afT1rOnJo9wK_yrX4u51jaEgLVSkNY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{tokenA}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"amount\": 500 }"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/wallet/add-money",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"wallet",
+								"add-money"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Money - ₹300",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTJiZGEyNDBiYjQ2YzRmOWYzNjViZiIsImlhdCI6MTc2NzAzMDc5OCwiZXhwIjoxNzY3NjM1NTk4fQ.8FykNK6T-CM34afT1rOnJo9wK_yrX4u51jaEgLVSkNY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{tokenA}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"amount\": 300 }"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/wallet/add-money",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"wallet",
+								"add-money"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wallet Summary",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTJiZGEyNDBiYjQ2YzRmOWYzNjViZiIsImlhdCI6MTc2NzAzMDc5OCwiZXhwIjoxNzY3NjM1NTk4fQ.8FykNK6T-CM34afT1rOnJo9wK_yrX4u51jaEgLVSkNY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{tokenA}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Redeem Swiggy - ₹150",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTJiZGEyNDBiYjQ2YzRmOWYzNjViZiIsImlhdCI6MTc2NzAzMDc5OCwiZXhwIjoxNzY3NjM1NTk4fQ.8FykNK6T-CM34afT1rOnJo9wK_yrX4u51jaEgLVSkNY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{tokenA}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/wallet/redeem/SWG150",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"wallet",
+								"redeem",
+								"SWG150"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Redeem Amazon - ₹200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTJiZGEyNDBiYjQ2YzRmOWYzNjViZiIsImlhdCI6MTc2NzAzMDc5OCwiZXhwIjoxNzY3NjM1NTk4fQ.8FykNK6T-CM34afT1rOnJo9wK_yrX4u51jaEgLVSkNY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{tokenA}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/wallet/redeem/AMZ200",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"wallet",
+								"redeem",
+								"AMZ200"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WALLET - USER B",
+			"item": [
+				{
+					"name": "Add Money - ₹1000",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTM2N2RkMWQ5MmVjYTI5MGYyOTE0OCIsImlhdCI6MTc2NzA3MzgxOCwiZXhwIjoxNzY3Njc4NjE4fQ.n3LZirpy89gNG9WEcJmjRwZyQFDHVerPlAxbDzQi-sI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{tokenB}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"amount\": 1000 }"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/wallet/add-money",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"wallet",
+								"add-money"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wallet Summary",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTM2N2RkMWQ5MmVjYTI5MGYyOTE0OCIsImlhdCI6MTc2NzA3MzgxOCwiZXhwIjoxNzY3Njc4NjE4fQ.n3LZirpy89gNG9WEcJmjRwZyQFDHVerPlAxbDzQi-sI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{tokenB}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

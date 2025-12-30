@@ -9,7 +9,7 @@ const status = require('../Constants/status.constants');
 
 async function addMoney(userId, amount) {
 
-  if (amount <= 0) throw { ...status.BAD_REQUEST, message: 'Amount must be positive' };
+  if (amount <= 0) throw { ...status.BAD_REQUEST, message: 'Amount must be positive', type:'SERVICE_ERROR' };
 
   const session = await mongoose.startSession();
   try {
@@ -21,7 +21,7 @@ async function addMoney(userId, amount) {
       { new: true, session }
     );
 
-    if (!wallet) throw { ...status.NOT_FOUND, message: 'Wallet not found' };
+    if (!wallet) throw { ...status.NOT_FOUND, message: 'Wallet not found', type:'SERVICE_ERROR' };
 
     await Transaction.create([{
       userId, type: 'CREDIT', amount, timestamp: new Date()
@@ -50,7 +50,7 @@ async function redeem(userId, voucherId) {
     session.startTransaction();
   
     const voucher = await Voucher.findOne({ voucherId, isActive: true }).session(session);
-    if (!voucher) throw { ...status.NOT_FOUND, message: 'Voucher not found' };
+    if (!voucher) throw { ...status.NOT_FOUND, message: 'Voucher not found', type:'SERVICE_ERROR' };
 
     // conditional decrement only if balance >= voucher.value
     const wallet = await Wallet.findOneAndUpdate(
@@ -59,7 +59,7 @@ async function redeem(userId, voucherId) {
       { new: true, session }
     );
 
-    if (!wallet) throw { ...status.BAD_REQUEST, message: 'Insufficient Balance' };
+    if (!wallet) throw { ...status.BAD_REQUEST, message: 'Insufficient Balance', type:'SERVICE_ERROR' };
 
     await Transaction.create([{
       userId, type: 'DEBIT', amount: voucher.value, timestamp: new Date()
@@ -71,6 +71,7 @@ async function redeem(userId, voucherId) {
 
     await session.commitTransaction();
     return {  wallet, voucher };
+    
   } catch (err) {
     await session.abortTransaction();
     throw err;

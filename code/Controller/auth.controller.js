@@ -2,6 +2,7 @@ const User = require("../Model/User");
 const Wallet = require("../Model/Wallet");
 const jwt = require("jsonwebtoken");
 const status = require("../Constants/status.constants");
+const { isPhoneNumber, isEmail } = require("../Utils/basic.util");
 
 exports.signup = async (req, res, next) => {
   try {
@@ -19,7 +20,14 @@ exports.signup = async (req, res, next) => {
       return res.status(status.BAD_REQUEST.code).json({ ...status.BAD_REQUEST, message: "Password is required" });
     }
 
-   
+    if (!isEmail(email)) {
+      return res.status(status.BAD_REQUEST.code).json({ ...status.BAD_REQUEST, message: "Invalid email " });
+    }
+
+    if (!isPhoneNumber(phone)) {
+      return res.status(status.BAD_REQUEST.code).json({ ...status.BAD_REQUEST, message: "Invalid phone number " });
+    }
+
     const user = new User({ name, email, phone, password });
     await user.save();
    
