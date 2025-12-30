@@ -17,16 +17,16 @@ A backend system simulating a **wallet + rewards platform**, featuring:
 
 
 
-## 🛠 Setup & Run Locally
+## Setup & Run Locally
 
-### 1️⃣ Clone & Install
+### 1 Clone & Install
 ```bash
 git clone <repo-url>
 cd smart-rewards-backend
 npm install
 ```
 
-### 2️⃣ Environment Variables
+### 2 Environment Variables
 Copy and edit:
 ```bash
 cp .env.example .env
@@ -42,12 +42,12 @@ JWT_SECRET=your_secret_here
 
 ---
 
-## 🧬 Mongo Replica-Set (Required for Transactions)
+## Mongo Replica-Set (Required for Transactions)
 Transactions require replica-set enabled Mongo.
 
 
 
-## ▶ Start Server
+## Start Server
 ```bash
 npm start
 ```
@@ -55,23 +55,23 @@ Server: http://localhost:5000
 
 ---
 
-## 🧪 Postman Testing
+## Postman Testing
 Import from:
 ```
 Postman Collection/Smart Rewards.postman_collection.json
 ```
 
 Test flow:
-1️⃣ Signup User A & B
-2️⃣ Login → auto-saves tokens
-3️⃣ POST /rewards/seed (run once)
-4️⃣ Add wallet money
-5️⃣ Redeem vouchers
-6️⃣ GET /wallet → verify balance + transactions
+1 Signup User A & B
+2 Login → auto-saves tokens
+3 POST /rewards/seed (run once)
+4 Add wallet money
+5 Redeem vouchers
+6 GET /wallet → verify balance + transactions
 
 ---
 
-## 🗂 Mongo Index Exports
+## Mongo Index Exports
 Stored under:
 ```
 index-exports/
@@ -104,7 +104,7 @@ Include:
 
 ---
 
-## ⚙ Error Handling & Logging
+## Error Handling & Logging
 - Global error handler returns structured JSON
 - Custom logger logs:
 ```
@@ -115,7 +115,7 @@ Include:
 
 
 
-## 🧑‍💻 Author
+## Author
 Sagnik Biswas – Backend Engineer
 
 ---
