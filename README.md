@@ -60,7 +60,7 @@ Import from:
 ```
 Postman Collection/Smart Rewards.postman_collection.json
 ```
-
+```
 Test flow:
 1 Signup User A & B
 2 Login → auto-saves tokens
@@ -68,7 +68,7 @@ Test flow:
 4 Add wallet money
 5 Redeem vouchers
 6 GET /wallet → verify balance + transactions
-
+```
 ---
 
 ## Mongo Index Exports
